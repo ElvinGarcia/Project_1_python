@@ -1,0 +1,33 @@
+{
+  "name": "My Dev Environment",
+
+  // Use your pre-built image
+  "image": "dev-env",
+
+  // Mount your project code
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  // Optional: Settings to apply *inside* the container
+  "settings": {
+    // Sets the container's VS Code terminal to zsh
+    "terminal.integrated.defaultProfile.linux": "zsh"
+  },
+
+  // Optional: Extensions to install *inside* the container
+  "extensions": [
+    "ms-python.python",
+    "ms-vscode.cpptools"
+  ],
+
+  // --- THIS IS THE FIX ---
+  //
+  // 'runArgs' is for Docker *options*, like setting a name.
+  "runArgs": [
+    "--name=${localWorkspaceFolderBasename}-devcontainer",
+    "--rm"
+  ],
+
+  // 'overrideCommand' is the correct place for the *command*
+  // that keeps the container running.
+  "overrideCommand": "sleep infinity"
+}
